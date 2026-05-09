@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0a0f1e;
+  --bg-secondary: #111827;
+  --bg-panel: #0d1526;
+  --bg-panel-border: #1e2d45;
+  --accent-teal: #00d4c8;
+  --accent-teal-dim: #00d4c820;
+  --accent-amber: #f5a623;
+  --accent-amber-dim: #f5a62320;
+  --text-primary: #f0f4ff;
+  --text-secondary: #8b9abb;
+  --text-muted: #4a5568;
+  --body-glow: #4db8ff;
+  --pathology-glow: #f5a623;
+  --normal-glow: #00d4c8;
+  --portal-patient: #00d4c8;
+  --portal-clinician: #7c6af7;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+  touch-action: none;
+}
+
+.glow-teal { box-shadow: 0 0 24px var(--accent-teal-dim); }
+.glow-amber { box-shadow: 0 0 24px var(--accent-amber-dim); }
