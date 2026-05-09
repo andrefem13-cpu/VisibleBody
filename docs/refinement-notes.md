@@ -43,8 +43,18 @@ Recommendation: build Phase 1 as B2C-shaped (the demo is the marketing), but the
 4. **Add a "Was this helpful?" widget** to every explanation. Free eval data.
 5. **Pick one specialty for the demo body** — e.g., MSK (knee, shoulder, spine, hip). A demo that goes deep on one specialty is more compelling than one that's shallow across nine.
 
-## Decisions to make before next session
+## Decisions — LOCKED
 
-- Primary monetization wedge: B2C patient, B2B clinician, or med-ed?
-- One specialty depth vs. wide-and-shallow for the Phase 1 demo?
-- Are we okay reframing away from "personal diagnostic overlay" toward "anatomy + education with optional scan visualization"?
+- **Framing:** anatomy education + scan visualization. AI explains concepts; the user/clinician interprets their scan. Lowers FDA SaMD risk; expands TAM.
+- **Primary monetization:** B2B clinician SaaS. Land with individual specialists; expand to groups/health systems later.
+- **Phase 1 demo specialty:** **Orthopedics** as primary (knee, shoulder, spine, hip). Neurology is a stretch goal — visually compelling but anatomy + pathology curation is heavier.
+- **Caching:** in-memory/blob cache on `(regionId, pathologyId, mode)` for now. Defer Redis until traffic justifies it.
+- **Cost exploration:** investigate local deployment + small language model (SLM) for the explanation tier as a cost-control path. Claude API stays the default for quality; SLM becomes a fallback or free-tier engine. Candidates to evaluate: Llama 3.1 8B, Phi-3, Qwen 2.5 7B via Ollama or llama.cpp. Decision criteria: medical-content quality at temp=0, latency under 3s on a modest GPU, JSON-mode reliability.
+
+## Implications for the build
+
+- **Copy pass:** strip "personalized pathology overlay" / "AI tells you what's in your scan" from headline language. Replace with "Understand your anatomy. Visualize your scan. Explain it to your patients in 30 seconds."
+- **Phase 1 region list shrinks:** knee, shoulder, hip, lumbar spine, cervical spine, rotator cuff, ACL/meniscus, hand/wrist — ~8 ortho regions seeded deeply beats 15 shallow.
+- **Clinician portal becomes the hero.** Patient portal exists for the demo / consumer marketing surface, but the polished flow is clinician → "explain this to my patient" → branded export.
+- **Scan upload focus:** MSK MRI and X-ray (knee, shoulder, spine). Narrower segmentation problem when we get to Phase 2.
+- **SLM track:** add a `lib/llm/` abstraction so the explanation provider is swappable (Claude API ↔ local Ollama endpoint). Keep prompts identical; only the transport changes.
