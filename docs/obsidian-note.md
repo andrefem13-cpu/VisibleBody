@@ -57,7 +57,7 @@ status: active
 - SLM fallback for free tier or aggressive cost optimization.
 
 ## Repo
-- GitHub: `andrefem13-cpu/visiblebody`
+- GitHub: `BloodSweatxED/visiblebody`
 - Branch: `claude/review-product-idea-bqcc4`
 
 ## Next experiments
